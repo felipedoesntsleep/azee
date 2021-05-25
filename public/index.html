@@ -41,9 +41,9 @@
   </head>
   <div class="topnav">
     <a class="active" href="#home">Current</a>
-    <a href="#players">Players</a>
-    <a href="#previous">Previous Tourneys</a>
-    <a href="#hall">Hall of Fame</a>
+    <a href="./players.html">Players</a>
+    <a href="./previous.html">Previous Tourneys</a>
+    <a href="./fame.html">Hall of Fame</a>
   </div>
     <body>
       <div class="panel">
@@ -52,7 +52,7 @@
        </h1>
      </div>
      <div class="panel">
-    <div style="margin:5%">
+    <div style="margin:3%">
 
      <select name="p1select" id="p1">
      </select>
@@ -71,11 +71,11 @@
      </form><br>
      <button id = "submit" type="button">Submit!</button>
      </div>
-     <div class="panel" style="font-size: 40px;">
-       RESULTS
-     </div>
      <div class="panel">
-       <button id = "update" type="button">Update!</update></button>
+      <div  style="font-size: 40px;">
+        RESULTS
+      </div>
+       <!-- <button id = "update" type="button">Update!</update></button> -->
        <div id="tablediv">
      <table id = "table">
        <tr>
@@ -89,13 +89,13 @@
      </table>
     </div>
      </div>
-     <div class="panel">
+     <!-- <div class="panel">
       <form>
         <label for="fname">Player:</label>
         <input type="text" id="player" name="player"><br>
       </form>
       <button id = "addp" type="button">Add Player!</button>
-     </div>
+     </div> -->
      
        <div id="chart" >
        </div>
@@ -261,37 +261,37 @@
       });
     }
 
-    function addPlayer(player){
-        console.log(player);
-        var postData = {
-            player: player,
-          };
-          var newPostKey = firebase.database().ref().child('posts').push().key;
-          var updates = {};
-          updates['/STD4P1-PLAYERS/' + newPostKey] = postData
-          updates['/posts/' + newPostKey] = postData;
-          updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-          updatePlayers();
-          return firebase.database().ref().update(updates);
-      }
+    // function addPlayer(player){
+    //     console.log(player);
+    //     var postData = {
+    //         player: player,
+    //       };
+    //       var newPostKey = firebase.database().ref().child('posts').push().key;
+    //       var updates = {};
+    //       updates['/STD4P1-PLAYERS/' + newPostKey] = postData
+    //       updates['/posts/' + newPostKey] = postData;
+    //       updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+    //       updatePlayers();
+    //       return firebase.database().ref().update(updates);
+    //   }
 
 
       submitButton.addEventListener('click', function(){
           console.log("in submit button");
           insertGame(p1.value, p2.value, p3.value, p4.value, winner.value, link.value);
       });
-      let updateButton = document.getElementById("update");
-      updateButton.addEventListener('click', function(){
-          console.log("in update button");
-          updateTable();
-      });
+      // let updateButton = document.getElementById("update");
+      // updateButton.addEventListener('click', function(){
+      //     console.log("in update button");
+      //     updateTable();
+      // });
 
-      let addButton = document.getElementById("addp");
-      let player = document.getElementById("player");
-      addButton.addEventListener('click', function(){
-          console.log("in addp button");
-          addPlayer(player.value);
-      });
+      // let addButton = document.getElementById("addp");
+      // let player = document.getElementById("player");
+      // addButton.addEventListener('click', function(){
+      //     console.log("in addp button");
+      //     addPlayer(player.value);
+      // });
         // update the variable when the starCount is changed in the database
         // var starCountRef = database.ref('posts/' + postId + '/starCount');
         // starCountRef.on('value', function(snapshot) {

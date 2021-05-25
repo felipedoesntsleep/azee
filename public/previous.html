@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Azee Tourney</title>
+    <link rel="stylesheet" href="./main.css">
+
+  </head>
+  <div class="topnav">
+    <a href="./index.html">Current</a>
+    <a href="./players.html">Players</a>
+    <a class="active" href="./previous.html">Previous Tourneys</a>
+    <a href="./fame.html">Hall of Fame</a>
+  </div>
+    <body>
+      <div class="panel">
+       <h1>
+         PREVIOUS TOURNEYS
+       </h1>
+     </div>
+     
+       <div id="chart" >
+       </div>
+     
+      </body>
+      <!-- <script type="module" src="index.js"></script> -->
+      <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        // TODO: Replace with your project's customized code snippet
+        var config = {
+          apiKey: "<API_KEY>",
+          authDomain: "azee-614e8.firebaseapp.com",
+          databaseURL: "https://azee-614e8-default-rtdb.firebaseio.com/",
+          // storageBucket: "<BUCKET>.appspot.com",
+          // messagingSenderId: "<SENDER_ID>",
+        };
+        firebase.initializeApp(config);
+      
+        // Get a reference to the database service
+        var database = firebase.database();
+
+
+        // }
+      </script>
+
+     
+      <div class="bottom" id="right">
+        Website design by Felipe420
+      </div>
+     
+      <div class="bottom" id="left">
+       <a href=" https://azee.mattle.online/lobby/rooms" style="color:#FAFAFF">Azee</a>
+     </div>
+
+  <!-- </body> -->
+</html>
