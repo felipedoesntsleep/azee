@@ -3,8 +3,8 @@
 // // The Firebase Admin SDK to access Firestore.
 // const admin = require('fi
 
-import {firebase} from "firebase/app";
-import "firebase/database";
+// import {firebase} from "firebase/app";
+// import "firebase/database";
 
 
 var database = firebase.database();
