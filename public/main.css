@@ -208,4 +208,12 @@ a:visited {
   width:100%;
   /* background-color: blue; */
   overflow:scroll;
+  color:var(--accent2);
+}
+
+th {
+  background: var(--background);
+  position: sticky;
+  top: 0;
+  
 }
