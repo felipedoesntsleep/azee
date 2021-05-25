@@ -48,37 +48,17 @@
      </div>
      <div class="panel">
      <select name="p1select" id="p1">
-       <option value="felipe420">Felipe420</option>
-       <option value="gritfield">Gritfield</option>
-       <option value="bangerz">Bangerz</option>
-       <option value="patime">Patime</option>
      </select>
      <select name="p2select" id="p2">
-       <option value="felipe420">Felipe420</option>
-       <option value="gritfield">Gritfield</option>
-       <option value="bangerz">Bangerz</option>
-       <option value="patime">Patime</option>
      </select>
      <select name="p3select" id="p3">
-       <option value="felipe420">Felipe420</option>
-       <option value="gritfield">Gritfield</option>
-       <option value="bangerz">Bangerz</option>
-       <option value="patime">Patime</option>
      </select>
      <select name="p4select" id="p4">
-       <option value="felipe420">Felipe420</option>
-       <option value="gritfield">Gritfield</option>
-       <option value="bangerz">Bangerz</option>
-       <option value="patime">Patime</option>
      </select>
      <select name="winner" id="winner">
-       <option value="felipe420">Felipe420</option>
-       <option value="gritfield">Gritfield</option>
-       <option value="bangerz">Bangerz</option>
-       <option value="patime">Patime</option>
      </select>
      <form>
-       <label for="fname">Link:</label><br>
+       <label for="fname">Link:</label>
        <input type="text" id="link" name="link"><br>
      </form>
      <button id = "submit" type="button">Submit!</button>
@@ -99,6 +79,13 @@
        </tr>
        
      </table>
+     </div>
+     <div class="panel">
+      <form>
+        <label for="fname">Player:</label>
+        <input type="text" id="player" name="player"><br>
+      </form>
+      <button id = "addp" type="button">Add Player!</button>
      </div>
      
        <div id="chart" >
@@ -121,7 +108,18 @@
       
         // Get a reference to the database service
         var database = firebase.database();
+
+        let submitButton = document.getElementById("submit");
+        let p1 = document.getElementById("p1");
+        let p2 = document.getElementById("p2");
+        let p3 = document.getElementById("p3");
+        let p4 = document.getElementById("p4");
+        let winner = document.getElementById("winner");
+        let link = document.getElementById("link");
+
+
         updateTable();
+        updatePlayers();
         console.log("start");
         var uid = firebase.auth().currentUser;
         function insertGame(p1, p2, p3, p4, winner, link) {
@@ -146,80 +144,129 @@
           return firebase.database().ref().update(updates);
       }
 
-    function updateTable(){
-      var ref = firebase.database().ref();
+      function updateTable(){
+        var ref = firebase.database().ref();
 
-          ref.on("value", function(snapshot) {
-            console.log(snapshot.val()["STD4P1"]);
-         
-        // HttpGet.onreadystatechange = (e) => {
-      let stdTable = snapshot.val()["STD4P1"];
+            ref.on("value", function(snapshot) {
+              console.log(snapshot.val()["STD4P1"]);
+          
+          // HttpGet.onreadystatechange = (e) => {
+        let stdTable = snapshot.val()["STD4P1"];
 
-      console.log(typeof(stdTable));
-      // console.log(Http.response)
-      // console.log(Http.responseText);  
-      // table.remove();
-      let games = [];
-      let numGames = 0;
-      for (let key in stdTable){
-        let game = stdTable[key];
-        // console.log(split_[i]);
-        // let short = split_[i].split("(")[1];
-        // console.log(short);
-        // let game = short.split(",");
-        // console.log(game);
-        // games.push(game);
-        var row = table.insertRow(1);
-        var cell0 = row.insertCell(0);
-        var cell1 = row.insertCell(1);
-        var cell2 = row.insertCell(2);
-        var cell3 = row.insertCell(3);
-        var cell4 = row.insertCell(4);
-        var cell5 = row.insertCell(5);
-        var link = document.createElement("a");
-        console.log(game["link"]);
-        if (game["link"] != ""){
-          link.setAttribute("href", game["link"]);
-          var linkText = document.createTextNode(numGames+1);
-          link.appendChild(linkText);
+        console.log(typeof(stdTable));
+        // console.log(Http.response)
+        // console.log(Http.responseText);  
+        // table.remove();
+        let games = [];
+        let numGames = 0;
+        for (let key in stdTable){
+          let game = stdTable[key];
+          // console.log(split_[i]);
+          // let short = split_[i].split("(")[1];
+          // console.log(short);
+          // let game = short.split(",");
+          // console.log(game);
+          // games.push(game);
+          var row = table.insertRow(1);
+          var cell0 = row.insertCell(0);
+          var cell1 = row.insertCell(1);
+          var cell2 = row.insertCell(2);
+          var cell3 = row.insertCell(3);
+          var cell4 = row.insertCell(4);
+          var cell5 = row.insertCell(5);
+          var link = document.createElement("a");
+          console.log(game["link"]);
+          if (game["link"] != ""){
+            link.setAttribute("href", game["link"]);
+            var linkText = document.createTextNode(numGames+1);
+            link.appendChild(linkText);
 
-        // Add the link to the previously created TableCell.
-          cell0.appendChild(link);
+          // Add the link to the previously created TableCell.
+            cell0.appendChild(link);
+          }
+          else{
+            cell0.innerHTML = numGames+1;
+          }
+          // link.setAttribute("href", game["link"]);
+          // link.className = "someCSSclass";
+          // For IE only, you can simply set the innerText of the node.
+          // The below code, however, should work on all browsers.
+          
+          // cell0.href = "https://azee.mattle.online/room/q82jgWtmZbAsM797W";
+          // cell0.innerHTML = game[0];
+          cell1.innerHTML = game["p1"];
+          cell2.innerHTML = game["p2"];
+          cell3.innerHTML = game["p3"];
+          cell4.innerHTML = game["p4"];
+          cell5.innerHTML = game["winner"];
+          numGames++;
         }
-        else{
-          cell0.innerHTML = numGames+1;
+        console.log();
+        for (let i = table.rows.length-1; i > numGames; i--){
+            table.deleteRow(i);
         }
-        // link.setAttribute("href", game["link"]);
-        // link.className = "someCSSclass";
-        // For IE only, you can simply set the innerText of the node.
-        // The below code, however, should work on all browsers.
-        
-        // cell0.href = "https://azee.mattle.online/room/q82jgWtmZbAsM797W";
-        // cell0.innerHTML = game[0];
-        cell1.innerHTML = game["p1"];
-        cell2.innerHTML = game["p2"];
-        cell3.innerHTML = game["p3"];
-        cell4.innerHTML = game["p4"];
-        cell5.innerHTML = game["winner"];
-        numGames++;
-      }
-      console.log();
-      for (let i = table.rows.length-1; i > numGames; i--){
-          table.deleteRow(i);
+
+      }, function (error) {
+              console.log("Error: " + error.code);
+            });
       }
 
-    }, function (error) {
-            console.log("Error: " + error.code);
-          });
+      
+
+      p1.addEventListener('change', winnerChoices);
+      p2.addEventListener('change', winnerChoices);
+      p3.addEventListener('change', winnerChoices);
+      p4.addEventListener('change', winnerChoices);
+      function winnerChoices(){
+        winner.options[0]=new Option(p1.value, p1.value, true, false);
+        winner.options[1]=new Option(p2.value, p2.value, true, false);
+        winner.options[2]=new Option(p3.value, p3.value, true, false);
+        winner.options[3]=new Option(p4.value, p4.value, true, false);
+      }
+
+      function updatePlayers(){
+        var ref = firebase.database().ref();
+
+            ref.on("value", function(snapshot) {
+              // console.log(snapshot.val()["STD4P1-PLAYERS"]);
+          
+          // HttpGet.onreadystatechange = (e) => {
+        let stdTable = snapshot.val()["STD4P1-PLAYERS"];
+        myData = [];
+        for (let key in stdTable){
+          myData.push(stdTable[key]["player"]);
+        }
+        let newData = myData.sort().filter(function(el,i,a){return i===a.indexOf(el)})   
+        for (let i = 0; i < newData.length; i++){
+          let selected = false;
+          if (i == 0){
+            selected = true;
+          }
+          p1.options[i]=new Option(newData[i], newData[i], true, selected);
+          p2.options[i]=new Option(newData[i], newData[i], true, selected);
+          p3.options[i]=new Option(newData[i], newData[i], true, selected);
+          p4.options[i]=new Option(newData[i], newData[i], true, selected);
+        } 
+        console.log(p1.value);
+        winnerChoices();
+      });
     }
 
-      let submitButton = document.getElementById("submit");
-      let p1 = document.getElementById("p1");
-      let p2 = document.getElementById("p2");
-      let p3 = document.getElementById("p3");
-      let p4 = document.getElementById("p4");
-      let winner = document.getElementById("winner");
-      let link = document.getElementById("link");
+    function addPlayer(player){
+        console.log(player);
+        var postData = {
+            player: player,
+          };
+          var newPostKey = firebase.database().ref().child('posts').push().key;
+          var updates = {};
+          updates['/STD4P1-PLAYERS/' + newPostKey] = postData
+          updates['/posts/' + newPostKey] = postData;
+          updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+          updatePlayers();
+          return firebase.database().ref().update(updates);
+      }
+
+
       submitButton.addEventListener('click', function(){
           console.log("in submit button");
           insertGame(p1.value, p2.value, p3.value, p4.value, winner.value, link.value);
@@ -228,6 +275,13 @@
       updateButton.addEventListener('click', function(){
           console.log("in update button");
           updateTable();
+      });
+
+      let addButton = document.getElementById("addp");
+      let player = document.getElementById("player");
+      addButton.addEventListener('click', function(){
+          console.log("in addp button");
+          addPlayer(player.value);
       });
         // update the variable when the starCount is changed in the database
         // var starCountRef = database.ref('posts/' + postId + '/starCount');
