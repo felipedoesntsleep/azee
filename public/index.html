@@ -39,14 +39,21 @@
       }
     </style> -->
   </head>
-  <body>
+  <div class="topnav">
+    <a class="active" href="#home">Current</a>
+    <a href="#players">Players</a>
+    <a href="#previous">Previous Tourneys</a>
+    <a href="#hall">Hall of Fame</a>
+  </div>
     <body>
       <div class="panel">
        <h1>
-         Azee
+         Azee Tourneys
        </h1>
      </div>
      <div class="panel">
+    <div style="margin:5%">
+
      <select name="p1select" id="p1">
      </select>
      <select name="p2select" id="p2">
@@ -57,10 +64,11 @@
      </select>
      <select name="winner" id="winner">
      </select>
+    </div>
      <form>
        <label for="fname">Link:</label>
        <input type="text" id="link" name="link"><br>
-     </form>
+     </form><br>
      <button id = "submit" type="button">Submit!</button>
      </div>
      <div class="panel" style="font-size: 40px;">
@@ -68,7 +76,8 @@
      </div>
      <div class="panel">
        <button id = "update" type="button">Update!</update></button>
-     <table id = "table" style="width:100%">
+       <div id="tablediv">
+     <table id = "table">
        <tr>
          <th>Game #</th>
          <th>P1</th>
@@ -77,8 +86,8 @@
          <th>P4</th>
          <th>Winner</th>
        </tr>
-       
      </table>
+    </div>
      </div>
      <div class="panel">
       <form>
@@ -301,7 +310,7 @@
       </div>
      
       <div class="bottom" id="left">
-       <a href=" https://azee.mattle.online/lobby/rooms" style="color:black">Azee</a>
+       <a href=" https://azee.mattle.online/lobby/rooms" style="color:#FAFAFF">Azee</a>
      </div>
 
   <!-- </body> -->

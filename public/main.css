@@ -1,9 +1,12 @@
 :root {
-    --background: #444488;
-    --text:#53131E;
-    --accent1: #4D6A51;
-    --accent2:#D4D1F0;
-    --accent3:#F3F9D2;
+    --text: #FAFAFF;
+    --background:#050505;
+    --accent1: #C6ECAE;
+    --accent2: #8B9EB7;
+    --accent3: #E3A587;
+    /* --accent1:#A07178; */
+    /* --accent3: #F7ECE1; */
+    /* --accent1:#776274; */
   }
 
 html {
@@ -21,16 +24,18 @@ html {
   color: var(--text);  font-family: Verdana, sans-serif;}
   
   body {
-    height:95%;
+    height:100%;
+    margin-top:100px;
   }
 
-  h1 {text-align: center;}
+  h1 {text-align: center;
+      font-size:50px;}
   p {text-align: center;}
   div {text-align: center;
     margin-bottom: 10px;}
 
 
-button:hover {
+/* button:hover {
   background-color: var(--accent1);
   color: var(--accent3);
 }
@@ -46,7 +51,7 @@ button {
 	text-decoration:none;
   background-color: var(--accent2);
   color: var(--text);
-}
+} */
 
 
 /* button:focus{
@@ -61,13 +66,16 @@ button {
 .panel{
   /* background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(rgb(212, 180, 131),1)); */
   /* background-image:radial-gradient(var(--accent3), rgba(255,0,0,0)); */
-  background-color: var(--accent3);
-  border-radius:15px;
-  opacity:0.8;
+  background-color: var(--background);
+  border:3px solid var(--accent3);
+  opacity:1;
   width : 90%;
+  height:100%;
   margin: auto;
-  margin-bottom: 5px;
-  padding: 5px 5px 5px 5px;
+  margin-bottom: 50px;
+  padding: 10px 10px 10px 10px;
+  align-items:center;
+  overflow:scroll;
 }
 
 /* #label{
@@ -99,4 +107,105 @@ text.shadow {
   text-align: left;
   font-size:15px;
   width:109px;
+}
+
+.topnav {
+  position: fixed;
+  top:0;
+  width: 100%;
+  margin-bottom:100px;
+  background-color: var(--accent2);
+  overflow: hidden;
+  z-index:999;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+.topnav a:link {
+  color: #f2f2f2;
+}
+
+.topnav a:visited {
+  color: #f2f2f2;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: var(--accent3);
+  color: var(--text);
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: var(--accent1);
+  color: var(--background);
+}
+
+button{
+  /* position: center;
+  display: center; */
+  background: var(--background);
+  color: var(--text);
+  font-size: 14px;
+  font-family: Verdana, sans-serif;
+  text-decoration: none;
+  margin-top: 30px;
+  border: 2px solid var(--accent2);
+  padding: 10px 10px;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 1s all ease;
+  transform: translate(0%,-50%); 
+  width:100%;
+}
+button::before{
+  background: var(--accent2);
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: -1;
+  transition: all 0.6s ease;
+}
+
+
+button::before{
+  width: 0%;
+  height: 100%;
+}
+
+button:hover::before{
+  width: 100%;
+}
+
+a:link {
+  color: var(--accent3);
+}
+
+/* visited link */
+a:visited {
+  color: var(--accent1);
+}
+
+#tablediv{
+  overflow:scroll;
+  height:400px;
+  width:100%;
+  /* background-color: blue; */
+}
+
+#table{
+  overflow:scroll;
+  height:50%;
+  width:100%;
+  /* background-color: blue; */
+  overflow:scroll;
 }
