@@ -187,7 +187,7 @@ button:hover::before{
 }
 
 a:link {
-  color: var(--accent3);
+  color: var(--accent1);
 }
 
 /* visited link */
