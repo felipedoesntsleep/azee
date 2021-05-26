@@ -19,7 +19,17 @@
          PLAYERS
        </h1>
      </div>
-    
+     <div class="panel">
+        <select name="pselect" id="pselect">
+        </select>
+     </div>
+     <div class="panel">
+         <span>Win percentage: </span>
+         <span id="winp"></span><br>
+         <span>Games played: </span>
+         <span id="gamesp"></span>
+         </div>
+     </div>
      <div class="panel">
       <form>
         <label for="fname">Player:</label>
@@ -48,9 +58,88 @@
       
         // Get a reference to the database service
         var database = firebase.database();
+        var uid = firebase.auth().currentUser;
 
         // let submitButton = document.getElementById("submit");
+        let stats = document.getElementById("winp");
+        let gamesp = document.getElementById("gamesp");
+    function getGames(){
+        var ref = firebase.database().ref();
 
+        ref.on("value", function(snapshot) {
+              console.log(snapshot.val()["STD4P1"]);
+          
+          // HttpGet.onreadystatechange = (e) => {
+        let games = snapshot.val()["STD4P1"];
+
+        // console.log(typeof(stdTable));
+        let winp = getWins(pselect.value, games);
+        let len = Object.keys(games).length;
+        let numGames = getNumGames(pselect.value, games);
+        console.log(len);
+        stats.innerText = winp/numGames;
+        gamesp.innerText = numGames;
+        
+        
+        }, function (error) {
+              console.log("Error: " + error.code);
+            });
+
+    }
+    let pselect = document.getElementById("pselect");
+    function updatePlayers(){
+        var ref = firebase.database().ref();
+
+            ref.on("value", function(snapshot) {
+              // console.log(snapshot.val()["STD4P1-PLAYERS"]);
+          
+          // HttpGet.onreadystatechange = (e) => {
+        let stdTable = snapshot.val()["STD4P1-PLAYERS"];
+        myData = [];
+        for (let key in stdTable){
+          myData.push(stdTable[key]["player"]);
+        }
+        let newData = myData.sort().filter(function(el,i,a){return i===a.indexOf(el)})   
+        for (let i = 0; i < newData.length; i++){
+          let selected = false;
+          if (i == 0){
+            selected = true;
+          }
+          pselect.options[i]=new Option(newData[i], newData[i], true, selected);
+        } 
+      });
+    }
+    updatePlayers();
+    // function playerStats(){
+    //     console.log("playerstats")
+    //     let games = getGames();
+    //     console.log(games);
+        
+    // }
+
+    
+    function getWins(player, games){
+        let wins = 0;
+        for (let key in games){
+            let game = games[key];
+            if (game["winner"] == player){
+                wins++;
+            }
+        }
+        return wins;
+    }
+
+    function getNumGames(player, games){
+        let wins = 0;
+        for (let key in games){
+            let game = games[key];
+            if (game["p1"] == player || game["p2"] == player 
+                || game["p3"] == player || game["p4"] == player){
+                wins++;
+            }
+        }
+        return wins;
+    }
 
     function addPlayer(player){
         console.log(player);
@@ -62,7 +151,7 @@
           updates['/STD4P1-PLAYERS/' + newPostKey] = postData
           updates['/posts/' + newPostKey] = postData;
           updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-          updatePlayers();
+        //   updatePlayers();
           return firebase.database().ref().update(updates);
       }
 
@@ -73,6 +162,10 @@
           addPlayer(player.value);
       });
         // }
+      pselect.addEventListener('change', getGames);
+        // playerStats();
+        // gamesEvent
+        getGames();
       </script>
 
      
